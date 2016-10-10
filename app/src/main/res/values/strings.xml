@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">LYToastDemo</string>
+    <string name="toast2">Toast 2</string>
+    <string name="toast4">Toast 4</string>
+</resources>
