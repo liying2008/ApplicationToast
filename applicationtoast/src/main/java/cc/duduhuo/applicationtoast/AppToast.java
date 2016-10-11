@@ -12,52 +12,49 @@ import static android.widget.Toast.LENGTH_LONG;
 import static android.widget.Toast.LENGTH_SHORT;
 
 /**
- * =======================================================
- * 版权：©Copyright LiYing 2015-2016. All rights reserved.
- * 作者：liying
- * 日期：2016/10/10 21:14
- * 版本：1.0
- * 描述：ApplicationContext Toast
- * 备注：
- * =======================================================
+ * ==========================================================<br>
+ * Copyright: Copyright LiYing 2015-2016. All rights reserved.<br>
+ * Author: liying<br>
+ * DateAndTime: 2016/10/10 21:14<br>
+ * Version: 0.2<br>
+ * Description: ApplicationContext Toast<br>
+ * Remarks:<br>
+ * ==========================================================<br>
  */
 
 public class AppToast {
-    private static Toast toast = null;  // 全局Toast
+    private static Toast toast = null;  // Global Toast
     public static final String TAG = "AppToast";
-    // 全局ApplicationContext
+    // Global ApplicationContext
     private static Application app;
 
     /**
-     * AppToast初始化
+     * AppToast initialization
      *
-     * @param application Application <br/>
-     *                    在应用相应的Application类中的onCreate方法中进行此初始化工作。<br/>
-     *                    <b>不要忘记在AndroidManifest文件的application节点下配置android:name属性。</b>
+     * @param application Application <br>
+     *                    This initialization is done in the onCreate method of the corresponding Application class.<br>
+     *                    <b>Do not forget to configure the android: name attribute under the application node of the AndroidManifest file.</b>
      */
     public static void init(Application application) {
         app = application;
     }
 
     /**
-     * 不允许实例化这个类
+     * It is not allowed to instantiate this class.
      */
     private AppToast() {
         throw new Error("Don't instantiate this class");
     }
 
-    /**
-     * @hide
-     */
     @IntDef({LENGTH_SHORT, LENGTH_LONG})
     @Retention(RetentionPolicy.SOURCE)
     public @interface Duration {
     }
 
     /**
-     * 显示Toast
+     * Display Toast
      *
-     * @param resId string类型的资源Id
+     * @param resId The resource id of the string resource to use.  Can be formatted text.
      */
     public static void showToast(@StringRes int resId) {
         if (toast != null) {
@@ -69,9 +66,9 @@ public class AppToast {
     }
 
     /**
-     * 显示Toast
+     * Display Toast
      *
-     * @param msg 显示的信息
+     * @param msg The text to show.  Can be formatted text.
      */
     public static void showToast(CharSequence msg) {
         if (toast != null) {
@@ -83,10 +80,10 @@ public class AppToast {
     }
 
     /**
-     * 显示Toast
+     * Display Toast
      *
-     * @param resId    string类型的资源Id
-     * @param duration 显示时长. Either {@link  android.widget.Toast#LENGTH_SHORT} or
+     * @param resId    The resource id of the string resource to use.  Can be formatted text.
+     * @param duration How long to display the message. Either {@link  android.widget.Toast#LENGTH_SHORT} or
      *                 {@link android.widget.Toast#LENGTH_LONG}
      */
     public static void showToast(@StringRes int resId, @Duration int duration) {
@@ -99,10 +96,10 @@ public class AppToast {
     }
 
     /**
-     * 显示Toast
+     * Display Toast
      *
-     * @param msg      显示的信息
-     * @param duration 显示时长. Either {@link  android.widget.Toast#LENGTH_SHORT} or
+     * @param msg      The text to show.  Can be formatted text.
+     * @param duration How long to display the message. Either {@link  android.widget.Toast#LENGTH_SHORT} or
      *                 {@link android.widget.Toast#LENGTH_LONG}
      */
     public static void showToast(CharSequence msg, @Duration int duration) {
@@ -115,23 +112,24 @@ public class AppToast {
     }
 
     /**
-     * 得到Toast对象 <br/>
-     * 需要调用show()方法才可以显示
+     * Get a Toast object <br>
+     * Need to call show() method to be displayed
      *
-     * @return Toast实例
+     * @return Toast object.
      */
     public static Toast getToast() {
-        if (toast == null) {
-            // 只是为了得到Toast对象，不需要调用show方法
-            toast = Toast.makeText(app, "", LENGTH_SHORT);
+        if (toast != null) {
+            toast.cancel();
+            toast = null;
         }
+        toast = Toast.makeText(app, "", Toast.LENGTH_SHORT);
         return toast;
     }
 
     /**
-     * 得到全局Application
+     * Get a global Application
      *
-     * @return 全局Application
+     * @return global Application
      */
     public static Application getApplication() {
         return app;

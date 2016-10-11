@@ -54,9 +54,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast toast = AppToast.getToast();
+                toast.setGravity(Gravity.TOP | Gravity.CENTER, 0, 0);
                 toast.setText("自定义Toast");
                 toast.setDuration(Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }
         });
