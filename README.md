@@ -2,7 +2,7 @@ ApplicationToast
 ====
 > 使用Application作为Context的Toast，具有即时显示的特性。
 
-> [Download Demo Apk](https://github.com/liying2008//releases/download/v0.3/apptoast_demo_v0.3.apk)
+> [Download Demo Apk](https://github.com/liying2008/ApplicationToast/releases/download/v0.3/apptoast_demo_v0.3.apk)
 
 引入(Download)
 ----
@@ -81,8 +81,8 @@ toast.show();
 
 作者(Author)
 ----
-李颖
-新浪微博：[@独毒火][2]
+李颖  
+新浪微博：[@独毒火][2]  
 邮箱：[liruoer2008@yeah.net][3]
 
 日期(Date)
