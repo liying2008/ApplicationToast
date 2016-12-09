@@ -1,18 +1,14 @@
 ApplicationToast
 ====
-----
-使用Application作为Context的Toast，具有即时显示的特性。 
+> 使用Application作为Context的Toast，具有即时显示的特性。
+
+> [Download Demo Apk](https://github.com/liying2008//releases/download/v0.3/apptoast_demo_v0.3.apk)
+
 引入(Download)
 ----
 ## Use Gradle  
 ```gradle  
-repositories {
-  mavenCentral() // jcenter() works as well because it pulls from Maven Central
-}
-
-dependencies {
-  compile 'cc.duduhuo.applicationtoast:applicationtoast:0.2'
-}
+compile 'cc.duduhuo.applicationtoast:applicationtoast:0.3'
 ```
 
 ## Or Maven  
@@ -20,17 +16,11 @@ dependencies {
 <dependency>
   <groupId>cc.duduhuo.applicationtoast</groupId>
   <artifactId>applicationtoast</artifactId>
-  <version>0.2</version>
+  <version>0.3</version>
   <type>pom</type>
 </dependency>
 ```
 
-## Or Ivy  
-```xml  
-<dependency org='cc.duduhuo.applicationtoast' name='applicationtoast' rev='0.2'>
-  <artifact name='$AID' ext='pom'></artifact>
-</dependency>
-```
 使用(Usage)
 ----
 ## 第一步(The First Step)
@@ -78,12 +68,12 @@ toast.show();
 | 方法名 | 返回值类型 | 备注
 | --- | --- |  ---
 | init(Application) | void | AppToast initialization
-| showToast(@StringRes int) | void |  Display Toast
+| showToast(int) | void | Display Toast
 | showToast(CharSequence) | void |  Display Toast
-| showToast(@StringRes int, @Duration int) | void | Display Toast
-| showToast(CharSequence, @Duration int) | void | Display Toast
-| getToast() | Toast |  Get a Toast object
-| getApplication() | Application | Get this Application
+| showToast(int, int) | void | Display Toast
+| showToast(CharSequence, int) | void | Display Toast
+| getToast() | Toast | Get a Toast object
+| ~~getApplication()~~ | Application | Get this Application
 
 效果演示(Demo)
 ----
@@ -91,12 +81,13 @@ toast.show();
 
 作者(Author)
 ----
-李颖 ([@独毒火][2])  
-[liruoer2008@yeah.net][3]
+李颖
+新浪微博：[@独毒火][2]
+邮箱：[liruoer2008@yeah.net][3]
 
 日期(Date)
 ----
-2016-10-11  
+2016-12-09
 
 License
 ----

@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.ref.WeakReference;
 
 import static android.widget.Toast.LENGTH_LONG;
 import static android.widget.Toast.LENGTH_SHORT;
@@ -16,7 +17,7 @@ import static android.widget.Toast.LENGTH_SHORT;
  * Copyright: Copyright LiYing 2015-2016. All rights reserved.<br>
  * Author: liying<br>
  * DateAndTime: 2016/10/10 21:14<br>
- * Version: 0.2<br>
+ * Version: 0.3<br>
  * Description: ApplicationContext Toast<br>
  * Remarks:<br>
  * ==========================================================<br>
@@ -24,9 +25,8 @@ import static android.widget.Toast.LENGTH_SHORT;
 
 public class AppToast {
     private static Toast toast = null;  // Global Toast
-    public static final String TAG = "AppToast";
-    // Global ApplicationContext
-    private static Application app;
+    private static final String TAG = "AppToast";
+    private static WeakReference<Application> app;
 
     /**
      * AppToast initialization
@@ -36,7 +36,7 @@ public class AppToast {
      *                    <b>Do not forget to configure the android: name attribute under the application node of the AndroidManifest file.</b>
      */
     public static void init(Application application) {
-        app = application;
+        app = new WeakReference<Application>(application);
     }
 
     /**
@@ -57,11 +57,8 @@ public class AppToast {
      * @param resId The resource id of the string resource to use.  Can be formatted text.
      */
     public static void showToast(@StringRes int resId) {
-        if (toast != null) {
-            toast.cancel();
-            toast = null;
-        }
-        toast = Toast.makeText(app, resId, LENGTH_SHORT);
+        clearToast();
+        toast = Toast.makeText(app.get(), resId, LENGTH_SHORT);
         toast.show();
     }
 
@@ -71,11 +68,8 @@ public class AppToast {
      * @param msg The text to show.  Can be formatted text.
      */
     public static void showToast(CharSequence msg) {
-        if (toast != null) {
-            toast.cancel();
-            toast = null;
-        }
-        toast = Toast.makeText(app, msg, LENGTH_SHORT);
+        clearToast();
+        toast = Toast.makeText(app.get(), msg, LENGTH_SHORT);
         toast.show();
     }
 
@@ -87,11 +81,8 @@ public class AppToast {
      *                 {@link android.widget.Toast#LENGTH_LONG}
      */
     public static void showToast(@StringRes int resId, @Duration int duration) {
-        if (toast != null) {
-            toast.cancel();
-            toast = null;
-        }
-        toast = Toast.makeText(app, resId, duration);
+        clearToast();
+        toast = Toast.makeText(app.get(), resId, duration);
         toast.show();
     }
 
@@ -103,11 +94,8 @@ public class AppToast {
      *                 {@link android.widget.Toast#LENGTH_LONG}
      */
     public static void showToast(CharSequence msg, @Duration int duration) {
-        if (toast != null) {
-            toast.cancel();
-            toast = null;
-        }
-        toast = Toast.makeText(app, msg, duration);
+        clearToast();
+        toast = Toast.makeText(app.get(), msg, duration);
         toast.show();
     }
 
@@ -118,11 +106,8 @@ public class AppToast {
      * @return Toast object.
      */
     public static Toast getToast() {
-        if (toast != null) {
-            toast.cancel();
-            toast = null;
-        }
-        toast = Toast.makeText(app, "", Toast.LENGTH_SHORT);
+        clearToast();
+        toast = Toast.makeText(app.get(), "", Toast.LENGTH_SHORT);
         return toast;
     }
 
@@ -131,7 +116,18 @@ public class AppToast {
      *
      * @return global Application
      */
+    @Deprecated
     public static Application getApplication() {
-        return app;
+        return app.get();
+    }
+
+    /**
+     * Clear an existing CusToast.
+     */
+    private static void clearToast() {
+        if (toast != null) {
+            toast.cancel();
+            toast = null;
+        }
     }
 }

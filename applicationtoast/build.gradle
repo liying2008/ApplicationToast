@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = "0.2"
+version = "0.3"
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.3"
@@ -10,8 +10,8 @@ android {
     defaultConfig {
         minSdkVersion 11
         targetSdkVersion 24
-        versionCode 1
-        versionName "0.2"
+        versionCode 3
+        versionName "0.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
@@ -97,8 +97,8 @@ if (project.rootProject.findProject('local.properties') != null){
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
 }
 bintray {
-    user = isHasFile ? properties.getProperty("bintray.user") : System.getenv("bintray.user")
-    key = isHasFile ? properties.getProperty("bintray.apikey") : System.getenv("bintray.apikey")
+    user = 'liying2008'
+    key = ''
     configurations = ['archives']
     pkg {
         repo = "ApplicationToast"
